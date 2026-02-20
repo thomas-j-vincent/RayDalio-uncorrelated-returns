@@ -1,35 +1,28 @@
 import riskfolio as rp
-import pandas as pd
 import yfinance as yf
-import seaborn as sns
-import pyfolio as pf
 import matplotlib.pyplot as plt
 
 assets = [
-    "PANW",
-    "NVDA",
-    "AAPL",
-    "MSFT",
-    "GOOG",
-    "TSLA",
-    "DIS",
-    "AXP",
-    "GLD",
-    "^GSPC",
+    "PANW", #Palo Alto Networks 
+    "NVDA", #Nvidia
+    "AAPL", #Apple
+    "MSFT", #Microsoft
+    "GOOG", #Alphabet (google)
+    "TSLA", #Tesla
+    "DIS",  #Disney
+    "AXP",  #American Express
+    "GLD",  #Gold
+    "^GSPC",#S&P 500
 ]
 
 data = yf.download(
     assets,
     start="2018-01-01",
     end="2024-08-08",
-    progress=False,
-    auto_adjust=True,
 )
 data = data["Close"]
-data
 
 returns = data.pct_change().dropna()
-returns
 
 returns.median().sort_values(ascending=False).to_frame(name="median_return")
 

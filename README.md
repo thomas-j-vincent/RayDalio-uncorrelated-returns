@@ -25,7 +25,23 @@ He ensures each of these make money (or atleast don't lose it) to limit losses.
 
 In 2025 it was reported that Ray Dalio was emphasising gold more, at one point allocating 10-15% of his portfolio to gold, saying it acts as a shield amongst fiscal stress such as overwhelming debt. He also recommends adjusting dynamically, to allow shifts based on market signals (but still avoiding overtrading)
 
+## The code:
+
+The first few lines are used to import the required modules, these are as follows:
+
+- riskfolio; a library built on top of CVXPY that is made for visualising portfolio optimisations
+
+- yfinance; a library that uses yahoo finance's API's to download market data
+
+- matplotlib; a library that can graph data we have discovered
+
+We then define assets, a requirement for the yfinance library that tells it what stocks/ETFs/commodities to download the data for, these are marked for what the ticker is.
+
+We then define the data, using the assets list as well as the range of data we want to download and in the line below state that we only want the close prices to be downloaded, this helps ensure prices are steady.
+
+## References:
 https://www.investorsjournal.org/post/holy-grail-dalio
 https://statoasis.com/post/the-holy-grail-by-ray-dalio
 https://www.idnfinancials.com/news/54197/ray-dalio-use-the-holy-grail-strategy-in-times-of-uncertainty%EF%BF%BC
 https://www.reuters.com/business/ray-dalio-suggests-gold-shield-us-markets-risk-heart-attack-2025-09-11/
+https://ranaroussi.github.io/yfinance/reference/api/yfinance.download.html
