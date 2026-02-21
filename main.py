@@ -12,6 +12,9 @@ assets = [
     "DIS",  #Disney
     "AXP",  #American Express
     "GLD",  #Gold
+    "STX",  #Seagate
+    "WDC",  #Western Digital
+    "MADE", #US manufacturing sector
     "^GSPC",#S&P 500
 ]
 
@@ -31,7 +34,7 @@ rp.plot_clusters(
     codependence= 'pearson',
     linkage= 'ward',
     k= None,
-    max_k= 10,
+    max_k= 13,
     leaf_order= True,
     dendrogram= True,
     ax= None

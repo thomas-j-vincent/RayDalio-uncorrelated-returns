@@ -38,6 +38,32 @@ The first few lines are used to import the required modules, these are as follow
 We then define assets, a requirement for the yfinance library that tells it what stocks/ETFs/commodities to download the data for, these are marked for what the ticker is.
 
 We then define the data, using the assets list as well as the range of data we want to download and in the line below state that we only want the close prices to be downloaded, this helps ensure prices are steady.
+Returns uses the downloaded data to calculate the percentage returns, had we not specified that we only want the close data it would do this for all open, high, low, volume prices - which would be pointless because a portfolio return doesn't care about the high price of the day, only the eventaul price. `.dropna()` ensures that for the first value the percentage change is not calculated, as it would cause an error because there is no previous data to calculate the percentage change from. 
+The next line returns the median of all the data, sorts them from high to low - and then puts them in a pandas dataframe called median_return. This dataframe contains the asset ticker in one column and their percentage change in another. Using a dataframe in this situation is benificial as it lets us work with more structured data that we otherwise would not be able to.
+`rp.plot_clusters` creates the initial dendrogram of the data, it ensures:
+- returns are the returns in the dataframe
+- codependence uses the [pearson correlation](#pearson-correlation), where assets that move together are grouped
+- linkage uses the [ward methods](#Ward-linkage-method), which minimised variation
+- K=None ensures that a set number of groups are not forced and instead the algorithm can calculate it itself
+- max_k=10, sets a maximum number of groups at 10, as we only have that amount of assets
+- leaf_order groups similar assets so they can be interpreted more easily.
+- dendogram ensures that the whole dendogram is drawn
+- ax tells matplotlib not to put the data on an axis and instead creates a new diagram
+
+`plt.show()` shows this created graph.
+
+the last line shows that the program should've been completed by printing done in the terminal.
+
+
+-Thomas
+
+## pearson correlation
+
+Measures linear correlation between sets of data, it is a ratio of the joint variability of two variables, positive when two variables show similar behaviour and negative when they do not (covariance). It is essentially a normalised measurement of covariance so that the value is always between -1 and 1.
+
+## Ward linkage method
+
+Used in hierarchial cluster analysis, Wards method is a special case where choosing the pair of clusters to merge is based on the optimal value of the function, the two tickers that result in the smallest increase in total cluster variance. Where low variance means points are very similar and high variance means that the points are spread out. (it groups similar stocks)
 
 ## References:
 https://www.investorsjournal.org/post/holy-grail-dalio
@@ -45,3 +71,8 @@ https://statoasis.com/post/the-holy-grail-by-ray-dalio
 https://www.idnfinancials.com/news/54197/ray-dalio-use-the-holy-grail-strategy-in-times-of-uncertainty%EF%BF%BC
 https://www.reuters.com/business/ray-dalio-suggests-gold-shield-us-markets-risk-heart-attack-2025-09-11/
 https://ranaroussi.github.io/yfinance/reference/api/yfinance.download.html
+https://riskfolio-lib.readthedocs.io/en/latest/index.html
+https://en.wikipedia.org/wiki/Ward%27s_method
+https://en.wikipedia.org/wiki/Pearson_correlation_coefficient#
+https://en.wikipedia.org/wiki/Covariance
+
