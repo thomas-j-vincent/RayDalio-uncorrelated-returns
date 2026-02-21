@@ -4,19 +4,22 @@ import matplotlib.pyplot as plt
 
 assets = [
     "PANW", #Palo Alto Networks 
-    "NVDA", #Nvidia
-    "AAPL", #Apple
-    "MSFT", #Microsoft
-    "GOOG", #Alphabet (google)
-    "TSLA", #Tesla
-    "DIS",  #Disney
-    "AXP",  #American Express
+    #"NVDA", #Nvidia
+    #"AAPL", #Apple
+    #"MSFT", #Microsoft
+    #"GOOG", #Alphabet (google)
+    #"TSLA", #Tesla
+    #"DIS",  #Disney
+    #"AXP",  #American Express
     "GLD",  #Gold
     "STX",  #Seagate
     "WDC",  #Western Digital
     "MADE", #US manufacturing sector
     "^GSPC",#S&P 500
 ]
+
+length = int(len(assets))
+print(length)
 
 data = yf.download(
     assets,
@@ -34,7 +37,7 @@ rp.plot_clusters(
     codependence= 'pearson',
     linkage= 'ward',
     k= None,
-    max_k= 13,
+    max_k= length- 1,
     leaf_order= True,
     dendrogram= True,
     ax= None

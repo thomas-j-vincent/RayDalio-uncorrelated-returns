@@ -35,7 +35,8 @@ The first few lines are used to import the required modules, these are as follow
 
 - matplotlib; a library that can graph data we have discovered
 
-We then define assets, a requirement for the yfinance library that tells it what stocks/ETFs/commodities to download the data for, these are marked for what the ticker is.
+We then define assets, a requirement for the yfinance library that tells it what stocks/ETFs/commodities to download the data for, these are marked for what the ticker is. (there should always be around 5 assets)
+Length is found by measuring the length of the assets list, and converting it into an integer
 
 We then define the data, using the assets list as well as the range of data we want to download and in the line below state that we only want the close prices to be downloaded, this helps ensure prices are steady.
 Returns uses the downloaded data to calculate the percentage returns, had we not specified that we only want the close data it would do this for all open, high, low, volume prices - which would be pointless because a portfolio return doesn't care about the high price of the day, only the eventaul price. `.dropna()` ensures that for the first value the percentage change is not calculated, as it would cause an error because there is no previous data to calculate the percentage change from. 
@@ -45,7 +46,7 @@ The next line returns the median of all the data, sorts them from high to low - 
 - codependence uses the [pearson correlation](#pearson-correlation), where assets that move together are grouped
 - linkage uses the [ward methods](#Ward-linkage-method), which minimised variation
 - K=None ensures that a set number of groups are not forced and instead the algorithm can calculate it itself
-- max_k=10, sets a maximum number of groups at 10, as we only have that amount of assets
+- max_k=length-1, sets a maximum number of groups at the length of the assets(-1 otherwise it wouldn't have to group any), as we only have that amount of assets
 - leaf_order groups similar assets so they can be interpreted more easily.
 - dendogram ensures that the whole dendogram is drawn
 - ax tells matplotlib not to put the data on an axis and instead creates a new diagram
