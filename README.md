@@ -35,11 +35,13 @@ The first few lines are used to import the required modules, these are as follow
 
 - matplotlib; a library that can graph data we have discovered
 
+- datetime is imported so that the program can read the current date
+
 We then define assets, a requirement for the yfinance library that tells it what stocks/ETFs/commodities to download the data for, these are marked for what the ticker is. (there should always be around 5 assets)
 Length is found by measuring the length of the assets list, and converting it into an integer
+Date is the current year, month, day - as gotten from the datetime function
 
-We then define the data, using the assets list as well as the range of data we want to download and in the line below state that we only want the close prices to be downloaded, this helps ensure prices are steady.
-Returns uses the downloaded data to calculate the percentage returns, had we not specified that we only want the close data it would do this for all open, high, low, volume prices - which would be pointless because a portfolio return doesn't care about the high price of the day, only the eventaul price. `.dropna()` ensures that for the first value the percentage change is not calculated, as it would cause an error because there is no previous data to calculate the percentage change from. 
+We then define the data, using the assets list as well as the range of data we want downloaded, start is set constant, although end uses the current date found from the date variable, to ensure the data stays current. `data = data["Close"]` states that we only want the close prices to be downloaded, this helps ensure prices are steady. Returns uses the downloaded data to calculate the percentage returns, had we not specified that we only want the close data it would do this for all open, high, low, volume prices - which would be pointless because a portfolio return doesn't care about the high price of the day, only the eventaul price. `.dropna()` ensures that for the first value the percentage change is not calculated, as it would cause an error because there is no previous data to calculate the percentage change from. 
 The next line returns the median of all the data, sorts them from high to low - and then puts them in a pandas dataframe called median_return. This dataframe contains the asset ticker in one column and their percentage change in another. Using a dataframe in this situation is benificial as it lets us work with more structured data that we otherwise would not be able to.
 `rp.plot_clusters` creates the initial dendrogram of the data, it ensures:
 - returns are the returns in the dataframe

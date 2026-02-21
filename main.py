@@ -1,6 +1,7 @@
 import riskfolio as rp
 import yfinance as yf
 import matplotlib.pyplot as plt
+import datetime
 
 assets = [
     "PANW", #Palo Alto Networks 
@@ -20,11 +21,13 @@ assets = [
 
 length = int(len(assets))
 print(length)
+date = datetime.datetime.now()
+print(date.date())
 
 data = yf.download(
     assets,
     start="2018-01-01",
-    end="2024-08-08",
+    end=date,
 )
 data = data["Close"]
 
